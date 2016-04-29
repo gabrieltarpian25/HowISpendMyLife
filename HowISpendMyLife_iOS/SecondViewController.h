@@ -62,8 +62,8 @@
 @property (nonatomic,strong) IBOutlet UILabel *labelKissingVal;
 
 // Coffees you had
-@property (nonatomic,strong) IBOutlet UILabel *labelCofees;
-@property (nonatomic,strong) IBOutlet UILabel *labelCofeesVal;
+@property (nonatomic,strong) IBOutlet UILabel *labelCoffees;
+@property (nonatomic,strong) IBOutlet UILabel *labelCoffeesVal;
 
 // Hours worked
 @property (nonatomic,strong) IBOutlet UILabel *labelWork;
