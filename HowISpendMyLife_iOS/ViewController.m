@@ -170,7 +170,7 @@
     
     // set minutes options
     NSString *option = [[NSString alloc]init];
-    option = @"Minutes";
+    option = @"Hours";
     [defaults setObject:option forKey:@"DisplayOption"];
     
     // open second screen
