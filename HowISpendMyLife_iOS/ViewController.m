@@ -74,6 +74,8 @@
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(100, 300, 70, 40)];
     [button setTitle:@"Next" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [button setShowsTouchWhenHighlighted:TRUE];
+
     
     
     // colors
@@ -167,11 +169,6 @@
     
     //set date
     [defaults setObject:dob forKey:@"Date"];
-    
-    // set minutes options
-    NSString *option = [[NSString alloc]init];
-    option = @"Hours";
-    [defaults setObject:option forKey:@"DisplayOption"];
     
     // open second screen
     SecondViewController *svc=[SecondViewController new];
