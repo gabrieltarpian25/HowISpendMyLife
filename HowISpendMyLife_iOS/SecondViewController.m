@@ -22,6 +22,16 @@
     // hide navigation controller
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
+    // User Defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // get the date
+    NSDate *d = [[NSDate alloc]init];
+    d = [defaults objectForKey:@"Date"];
+    
+    // get gender
+    bool boIsMan = [defaults boolForKey:@"IsMan"];
+    
     //create a textfield for showing date of birth
     UILabel *tf = [[UILabel alloc]initWithFrame:CGRectMake(100, 100, 200, 50)];
     
@@ -50,6 +60,13 @@
     [_butMinutes setBackgroundColor:[UIColor orangeColor]];
     [_butMinutes setShowsTouchWhenHighlighted:TRUE];
     
+    // button for reset input
+    UIButton *butReset = [[UIButton alloc]initWithFrame:CGRectMake(250, 100, 100, 40)];
+    [butReset setTitle:@"Reset Input" forState:UIControlStateNormal];
+    [butReset addTarget:self action:@selector(butResetPressed) forControlEvents:UIControlEventTouchUpInside];
+    [butReset setBackgroundColor:[UIColor darkGrayColor]];
+    [butReset setShowsTouchWhenHighlighted:TRUE];
+    
     // initialize the labels
     _labelLivingVal =          [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 100, 20)];
     _labelSleepingVal =        [[UILabel alloc]initWithFrame:CGRectMake(50, 180, 100, 20)];
@@ -64,10 +81,10 @@
     _labelKissingVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 450, 100, 20)];
     _labelCoffeesVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 480, 100, 20)];
     _labelIndoorVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 510, 100, 20)];
-    _labelWearVal =            [[UILabel alloc] initWithFrame:CGRectMake(50, 540, 100, 20)];
+    _labelStarringVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 540, 100, 20)];
     _labelShoppingVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 570, 100, 20)];
     _labelHairVal =            [[UILabel alloc] initWithFrame:CGRectMake(50, 600, 100, 20)];
-    _labelStarringVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 630, 100, 20)];
+    _labelWearVal =            [[UILabel alloc] initWithFrame:CGRectMake(50, 630, 100, 20)];
     
     _labelLiving =             [[UILabel alloc] initWithFrame:CGRectMake(170, 150, 200, 20)];
     _labelLiving.text = @"Living";
@@ -188,11 +205,15 @@
     [self.view addSubview:imageHolder];
     
     // MEN ONLY - Starring at women Icon
+    if(boIsMan)
+    {
     imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 537, 25, 25)];
     image = [UIImage imageNamed:@"starring.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
-    
+    }
+    else
+    {
     // WOMEN ONLY - Deciding what to wear at Icon
     imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 567, 25, 25)];
     image = [UIImage imageNamed:@"wear.png"];
@@ -210,17 +231,11 @@
     image = [UIImage imageNamed:@"hair.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
-
-    // User Defaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // get the date
-    NSDate *d = [[NSDate alloc]init];
-    d = [defaults objectForKey:@"Date"];
-    bool boIsMan = [defaults boolForKey:@"IsMan"];
+    }
     
     // create human instance
     [[Human humanInstance] setM_poDateOfBirth:d];
+    [[Human humanInstance] setM_boIsMan:boIsMan];
     
     //format the date and store it as a string in stringFromDate variable
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -232,6 +247,7 @@
     
     //add elements to view
     [[self view] addSubview:tf];
+    [[self view] addSubview:butReset];
     [[self view] addSubview:_butDays];
     [[self view] addSubview:_butHours];
     [[self view] addSubview:_butMinutes];
@@ -264,22 +280,44 @@
     [[self view] addSubview:_labelIndoor];
     
     // men only
-    [[self view] addSubview:_labelStarringVal];
-    [[self view] addSubview:_labelStarring];
-    
-    // women only
+    if(boIsMan)
+    {
+        [[self view] addSubview:_labelStarringVal];
+        [[self view] addSubview:_labelStarring];
+
+    }
+    else // women only
+    {
     [[self view] addSubview:_labelWear];
     [[self view] addSubview:_labelWearVal];
     [[self view] addSubview:_labelHair];
     [[self view] addSubview:_labelHairVal];
     [[self view] addSubview:_labelShoppingVal];
     [[self view] addSubview:_labelShopping];
+    }
     
     // show the minutes first everytime
     [self butMinutesPressed];
 
     //set date - only for tests
     //[defaults setObject:nil forKey:@"Date"];
+
+}
+
+// ****************************** button RESET is pressed
+-(void) butResetPressed
+{
+    
+    // User Defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // set Date to be NULL
+    [defaults setObject:nil forKey:@"Date"];
+    
+    // open main screen
+    ViewController *fvc=[ViewController new];
+    [self.navigationController pushViewController:fvc animated:true]; // open first view
+    [self dismissViewControllerAnimated:YES completion:nil]; // dismiss current view
 
 }
 
@@ -367,10 +405,15 @@
     _labelIndoorVal.text = displayHours;
     
     // MEN - starring at women
+    if([[Human humanInstance] m_boIsMan])
+    {
     hours = [[Human humanInstance]longGetStarringWomenHours];
     displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
                                                     numberStyle:NSNumberFormatterDecimalStyle];
     _labelStarringVal.text = displayHours;
+    }
+    else
+    {
     
     // WOMEN - deciding what to wear
     hours = [[Human humanInstance]longGetDecidingWearHours];
@@ -389,6 +432,7 @@
     displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
                                                     numberStyle:NSNumberFormatterDecimalStyle];
     _labelHairVal.text = displayHours;
+    }
     
     // set the background color
     [[self view] setBackgroundColor:[UIColor colorWithRed:236.0f/255.0f
