@@ -9,12 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "Human.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIPickerViewDelegate> 
 
 @property (nonatomic,strong) IBOutlet UITextField *dateOfBirth;
 @property (nonatomic,strong) UIDatePicker *datePicker;
-@property (nonatomic,strong) UIPickerView *pickerView;
-@property (nonatomic,strong) IBOutlet UITextField *gender;
+
+@property (nonatomic,strong) UIPickerView *pickerViewGender;
+@property (nonatomic,strong) IBOutlet UITextField *textGender;
+
+@property (nonatomic,strong) UIPickerView *pickerViewAlcohol;
+@property (nonatomic,strong) IBOutlet UITextField *textAlcohol;
+
+@property (nonatomic,strong) UIPickerView *pickerViewCoffee;
+@property (nonatomic,strong) IBOutlet UITextField *textCoffee;
 
 @end
 

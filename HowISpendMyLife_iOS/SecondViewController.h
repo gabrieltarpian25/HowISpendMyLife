@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Human.h"
+#import "ViewController.h"
 
 @interface SecondViewController : UIViewController
 
