@@ -14,6 +14,15 @@
 @property (nonatomic) bool m_boIsMan;
 @property (nonatomic) bool m_boIsFirstTime;
 
+// alcohol index
+@property (nonatomic) int alcoholPerMonth;
+
+// coffee index
+@property (nonatomic) int coffeePerMonth;
+
+// TV index
+@property (nonatomic) double _tvHoursPerDay;
+
 +(id)humanInstance;
 +(id) init;
 
@@ -82,5 +91,7 @@
 -(long) longGetLaughedTimes;
 -(long) longGetAlcoholLiters;
 -(long) longGetCoffeeTimes;
+-(long) longGetNoHeartbeats;
+-(long) longGetNoWords;
 
 @end

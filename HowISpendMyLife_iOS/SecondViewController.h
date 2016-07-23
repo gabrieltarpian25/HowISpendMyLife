@@ -74,6 +74,14 @@
 @property (nonatomic,strong) IBOutlet UILabel *labelIndoor;
 @property (nonatomic,strong) IBOutlet UILabel *labelIndoorVal;
 
+// Number of heart beats
+@property (nonatomic,strong) IBOutlet UILabel *labelHeartbeats;
+@property (nonatomic,strong) IBOutlet UILabel *labelHeartbeatsVal;
+
+// Number of words said
+@property (nonatomic,strong) IBOutlet UILabel *labelWords;
+@property (nonatomic,strong) IBOutlet UILabel *labelWordsVal;
+
 // WOMEN : Deciding what to wear
 @property (nonatomic,strong) IBOutlet UILabel *labelWear;
 @property (nonatomic,strong) IBOutlet UILabel *labelWearVal;

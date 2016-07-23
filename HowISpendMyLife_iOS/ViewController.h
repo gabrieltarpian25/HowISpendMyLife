@@ -23,5 +23,8 @@
 @property (nonatomic,strong) UIPickerView *pickerViewCoffee;
 @property (nonatomic,strong) IBOutlet UITextField *textCoffee;
 
+@property (nonatomic,strong) UIPickerView *pickerViewTV;
+@property (nonatomic,strong) IBOutlet UITextField *textTV;
+
 @end
 
