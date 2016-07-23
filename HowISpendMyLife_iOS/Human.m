@@ -89,28 +89,16 @@
     NSDateComponents *difference = [currCalendar components:NSCalendarUnitDay
                                                    fromDate:fromDate toDate:toDate options:0];
     
-    float days=[difference day]*0.09; // 9 %
+    float days= ([difference day] * __tvHoursPerDay) / 24;
     return days;
 }
 
 //------------------------ floatGetWatchingCommercialsDays ---------------------------------------------------
 -(float) floatGetWatchingCommercialsDays
 {
-    NSDate *fromDate;
-    NSDate *toDate;
-    
-    NSCalendar *currCalendar=[NSCalendar currentCalendar];
-    
-    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
-                     interval:NULL forDate:self.m_poDateOfBirth];
-    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
-                     interval:NULL forDate:[NSDate date]];
-    
-    NSDateComponents *difference = [currCalendar components:NSCalendarUnitDay
-                                                   fromDate:fromDate toDate:toDate options:0];
-    
-    float days=[difference day]*0.02; // 2 %
-    return days;
+    float daysWatchingTV = [self floatGetWatchingTVDays];
+    float daysWatchingCommercials = daysWatchingTV * 0.2; // 20 % of tv time
+    return daysWatchingCommercials;
 }
 
 //------------------------ floatGetHavingSexDays ---------------------------------------------------
@@ -469,37 +457,24 @@
     
     NSCalendar *currCalendar=[NSCalendar currentCalendar];
     
-    [currCalendar rangeOfUnit:NSCalendarUnitHour startDate:&fromDate
+    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
                      interval:NULL forDate:self.m_poDateOfBirth];
-    [currCalendar rangeOfUnit:NSCalendarUnitHour startDate:&toDate
+    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
                      interval:NULL forDate:[NSDate date]];
     
-    NSDateComponents *difference = [currCalendar components:NSCalendarUnitHour
+    NSDateComponents *difference = [currCalendar components:NSCalendarUnitDay
                                                    fromDate:fromDate toDate:toDate options:0];
     
-    hours=[difference hour]*0.09; // 9 %
+    hours=[difference day] * __tvHoursPerDay;
     return hours;
 }
 
 //------------------------ longGetWatchingTVHours ---------------------------------------------------
 -(long) longGetWatchingCommercialsHours
 {
-    NSDate *fromDate;
-    NSDate *toDate;
-    long hours=-1;
-    
-    NSCalendar *currCalendar=[NSCalendar currentCalendar];
-    
-    [currCalendar rangeOfUnit:NSCalendarUnitHour startDate:&fromDate
-                     interval:NULL forDate:self.m_poDateOfBirth];
-    [currCalendar rangeOfUnit:NSCalendarUnitHour startDate:&toDate
-                     interval:NULL forDate:[NSDate date]];
-    
-    NSDateComponents *difference = [currCalendar components:NSCalendarUnitHour
-                                                   fromDate:fromDate toDate:toDate options:0];
-    
-    hours=[difference hour]*0.02; // 2 %
-    return hours;
+    long hoursWatchingTV = [self longGetWatchingTVHours];
+    long hoursWatchingCommercials = hoursWatchingTV * 0.2; // 20 % of tv time
+    return hoursWatchingCommercials;
 }
 
 //------------------------ longGetHavingSexHours ---------------------------------------------------
@@ -858,44 +833,30 @@
 {
     NSDate *fromDate;
     NSDate *toDate;
-    long minutes=-1;
+    long hours=-1;
     
     NSCalendar *currCalendar=[NSCalendar currentCalendar];
     
-    [currCalendar rangeOfUnit:NSCalendarUnitMinute startDate:&fromDate
+    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
                      interval:NULL forDate:self.m_poDateOfBirth];
-    [currCalendar rangeOfUnit:NSCalendarUnitMinute startDate:&toDate
+    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
                      interval:NULL forDate:[NSDate date]];
     
-    NSDateComponents *difference = [currCalendar components:NSCalendarUnitMinute
+    NSDateComponents *difference = [currCalendar components:NSCalendarUnitDay
                                                    fromDate:fromDate toDate:toDate options:0];
     
-    
-    minutes=[difference minute]*0.09; // 9 % of the time
-    return minutes;
+    hours=[difference day] * __tvHoursPerDay * 60;
+    return hours;
+
 }
 //------------------------------------------------------------------------------------------------
 
 //------------------------ longGetWatchingCommercialsMinutes ---------------------------------------------------
 -(long) longGetWatchingCommercialsMinutes
 {
-    NSDate *fromDate;
-    NSDate *toDate;
-    long minutes=-1;
-    
-    NSCalendar *currCalendar=[NSCalendar currentCalendar];
-    
-    [currCalendar rangeOfUnit:NSCalendarUnitMinute startDate:&fromDate
-                     interval:NULL forDate:self.m_poDateOfBirth];
-    [currCalendar rangeOfUnit:NSCalendarUnitMinute startDate:&toDate
-                     interval:NULL forDate:[NSDate date]];
-    
-    NSDateComponents *difference = [currCalendar components:NSCalendarUnitMinute
-                                                   fromDate:fromDate toDate:toDate options:0];
-    
-    
-    minutes=[difference minute]*0.02; // 2 % of the time
-    return minutes;
+    long minsWatchingTV = [self longGetWatchingTVMinutes];
+    long minsWatchingCommercials = minsWatchingTV * 0.2; // 20 % of tv time
+    return minsWatchingCommercials;
 }
 //------------------------------------------------------------------------------------------------
 
@@ -1254,8 +1215,8 @@
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:self.m_poDateOfBirth];
     
-    long year=[components year]+18;
-    
+    // get date when reaching 17 years old
+    long year=[components year]+17;
     NSDateComponents *dc=[[NSDateComponents alloc]init];
     [dc setDay:[components day]];
     [dc setMonth:[components month]];
@@ -1263,16 +1224,17 @@
     NSDate *d=[[NSCalendar currentCalendar]dateFromComponents:dc];
     
     
-    [currCalendar rangeOfUnit:NSCalendarUnitYear startDate:&fromDate
+    [currCalendar rangeOfUnit:NSCalendarUnitMonth startDate:&fromDate
                      interval:NULL forDate:d];
-    [currCalendar rangeOfUnit:NSCalendarUnitYear startDate:&toDate
+    [currCalendar rangeOfUnit:NSCalendarUnitMonth startDate:&toDate
                      interval:NULL forDate:[NSDate date]];
     
-    NSDateComponents *difference = [currCalendar components:NSCalendarUnitYear
+    NSDateComponents *difference = [currCalendar components:NSCalendarUnitMonth
                                                    fromDate:fromDate toDate:toDate options:0];
     
-    float years=[difference year]*10;
-    return years;
+    // number of times per month multiplied by number of liters per time (200ml)
+    long liters=[difference month] * _alcoholPerMonth * 0.2;
+    return liters;
     
 }
 
@@ -1287,7 +1249,7 @@
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:self.m_poDateOfBirth];
     
-    long year=[components year]+19;
+    long year=[components year]+17;
     
     NSDateComponents *dc=[[NSDateComponents alloc]init];
     [dc setDay:[components day]];
@@ -1296,20 +1258,63 @@
     NSDate *d=[[NSCalendar currentCalendar]dateFromComponents:dc];
     
     
-    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+    [currCalendar rangeOfUnit:NSCalendarUnitMonth startDate:&fromDate
                      interval:NULL forDate:d];
+    [currCalendar rangeOfUnit:NSCalendarUnitMonth startDate:&toDate
+                     interval:NULL forDate:[NSDate date]];
+    
+    NSDateComponents *difference = [currCalendar components:NSCalendarUnitMonth
+                                                   fromDate:fromDate toDate:toDate options:0];
+    
+    long times=[difference month] * _coffeePerMonth ;
+    return times;
+}
+
+//------------------------ longGetNoHeartbeats ---------------------------------------------------
+-(long) longGetNoHeartbeats
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    long minutes=-1;
+    
+    NSCalendar *currCalendar=[NSCalendar currentCalendar];
+    
+    [currCalendar rangeOfUnit:NSCalendarUnitMinute startDate:&fromDate
+                     interval:NULL forDate:self.m_poDateOfBirth];
+    [currCalendar rangeOfUnit:NSCalendarUnitMinute startDate:&toDate
+                     interval:NULL forDate:[NSDate date]];
+    
+    NSDateComponents *difference = [currCalendar components:NSCalendarUnitMinute
+                                                   fromDate:fromDate toDate:toDate options:0];
+    
+    minutes=[difference minute] * 65; // 65 - number of heart beats per minute
+    return minutes;
+}
+
+//------------------------ Number of words said ---------------------------------------------------
+-(long) longGetNoWords
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *currCalendar=[NSCalendar currentCalendar];
+    
+    [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                     interval:NULL forDate:self.m_poDateOfBirth];
     [currCalendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
                      interval:NULL forDate:[NSDate date]];
     
     NSDateComponents *difference = [currCalendar components:NSCalendarUnitDay
                                                    fromDate:fromDate toDate:toDate options:0];
     
-    long times=[difference day]*1.6;
-    return times;
+    float days=[difference day];
     
+    if( [self m_boIsMan] )
+        days = days * 7000; // men are using 7.000 words per day
+    else days = days * 20000; // women are using 20.000 words per day
+    
+    return days;
 }
-
-
 
 
 

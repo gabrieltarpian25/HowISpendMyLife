@@ -37,7 +37,7 @@
     
     
     // button for days
-    _butDays = [[UIButton alloc]initWithFrame:CGRectMake(50, 50, 70, 40)];
+    _butDays = [[UIButton alloc]initWithFrame:CGRectMake(10, 50, 50, 40)];
     [_butDays setTitle:@"Days" forState:UIControlStateNormal];
     [_butDays addTarget:self action:@selector(butDaysPressed) forControlEvents:UIControlEventTouchUpInside];
     [_butDays setBackgroundColor:[UIColor colorWithRed:0.0f/255.0f
@@ -47,44 +47,67 @@
     [_butDays setShowsTouchWhenHighlighted:TRUE];
     
     // button for hours
-    _butHours = [[UIButton alloc]initWithFrame:CGRectMake(145, 50, 70, 40)];
+    _butHours = [[UIButton alloc]initWithFrame:CGRectMake(80, 50, 70, 40)];
     [_butHours setTitle:@"Hours" forState:UIControlStateNormal];
     [_butHours addTarget:self action:@selector(butHoursPressed) forControlEvents:UIControlEventTouchUpInside];
     [_butHours setBackgroundColor:[UIColor purpleColor]];
     [_butHours setShowsTouchWhenHighlighted:TRUE];
     
     // button for minutes
-    _butMinutes = [[UIButton alloc]initWithFrame:CGRectMake(240, 50, 80, 40)];
+    _butMinutes = [[UIButton alloc]initWithFrame:CGRectMake(170, 50, 80, 40)];
     [_butMinutes setTitle:@"Minutes" forState:UIControlStateNormal];
     [_butMinutes addTarget:self action:@selector(butMinutesPressed) forControlEvents:UIControlEventTouchUpInside];
     [_butMinutes setBackgroundColor:[UIColor orangeColor]];
     [_butMinutes setShowsTouchWhenHighlighted:TRUE];
     
     // button for reset input
-    UIButton *butReset = [[UIButton alloc]initWithFrame:CGRectMake(250, 100, 100, 40)];
-    [butReset setTitle:@"Reset Input" forState:UIControlStateNormal];
+    UIButton *butReset = [[UIButton alloc]initWithFrame:CGRectMake(270, 50, 100, 40)];
+    [butReset setTitle:@"Reset Data" forState:UIControlStateNormal];
     [butReset addTarget:self action:@selector(butResetPressed) forControlEvents:UIControlEventTouchUpInside];
     [butReset setBackgroundColor:[UIColor darkGrayColor]];
     [butReset setShowsTouchWhenHighlighted:TRUE];
+    
+    // make round corners to the buttons
+    butReset.layer.cornerRadius = 8;
+    _butDays.layer.cornerRadius = 8;
+    _butHours.layer.cornerRadius = 8;
+    _butMinutes.layer.cornerRadius = 8;
+    
+    // add shadow to buttons
+    _butMinutes.layer.masksToBounds = NO;
+    _butMinutes.layer.shadowColor = [UIColor blackColor].CGColor;
+    _butMinutes.layer.shadowOpacity = 0.9;
+    _butMinutes.layer.shadowRadius = 20;
+    
+    _butHours.layer.masksToBounds = NO;
+    _butHours.layer.shadowColor = [UIColor blackColor].CGColor;
+    _butHours.layer.shadowOpacity = 0.9;
+    _butHours.layer.shadowRadius = 20;
+    
+    _butDays.layer.masksToBounds = NO;
+    _butDays.layer.shadowColor = [UIColor blackColor].CGColor;
+    _butDays.layer.shadowOpacity = 0.9;
+    _butDays.layer.shadowRadius = 20;
     
     // initialize the labels
     _labelLivingVal =          [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 100, 20)];
     _labelSleepingVal =        [[UILabel alloc]initWithFrame:CGRectMake(50, 180, 100, 20)];
     _labelTVVal =              [[UILabel alloc]initWithFrame:CGRectMake(50, 210, 100, 20)];
     _labelCommercialsVal =     [[UILabel alloc]initWithFrame:CGRectMake(50, 240, 100, 20)];
-    _labelSexVal =             [[UILabel alloc]initWithFrame:CGRectMake(50, 270, 100, 20)];
-    _labelEatingVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 100, 20)];
-    _labelBathroomVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 330, 100, 20)];
-    _labelToiletVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 360, 100, 20)];
-    _labelLaughedVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 390, 100, 20)];
-    _labelAlcoholVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 420, 100, 20)];
-    _labelKissingVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 450, 100, 20)];
-    _labelCoffeesVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 480, 100, 20)];
-    _labelIndoorVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 510, 100, 20)];
-    _labelStarringVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 540, 100, 20)];
-    _labelShoppingVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 570, 100, 20)];
-    _labelHairVal =            [[UILabel alloc] initWithFrame:CGRectMake(50, 600, 100, 20)];
-    _labelWearVal =            [[UILabel alloc] initWithFrame:CGRectMake(50, 630, 100, 20)];
+    _labelEatingVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 270, 100, 20)];
+    _labelBathroomVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 100, 20)];
+    _labelToiletVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 330, 100, 20)];
+    _labelLaughedVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 360, 100, 20)];
+    _labelAlcoholVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 390, 100, 20)];
+    _labelKissingVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 420, 100, 20)];
+    _labelCoffeesVal =         [[UILabel alloc] initWithFrame:CGRectMake(50, 450, 100, 20)];
+    _labelIndoorVal =          [[UILabel alloc] initWithFrame:CGRectMake(50, 480, 100, 20)];
+    _labelHeartbeatsVal =      [[UILabel alloc] initWithFrame:CGRectMake(50, 510, 100, 20)];
+    _labelWordsVal =           [[UILabel alloc] initWithFrame:CGRectMake(50, 540, 100, 20)];
+    _labelStarringVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 570, 100, 20)];
+    _labelShoppingVal =        [[UILabel alloc] initWithFrame:CGRectMake(50, 600, 100, 20)];
+    _labelHairVal =            [[UILabel alloc] initWithFrame:CGRectMake(50, 630, 100, 20)];
+    _labelWearVal =            [[UILabel alloc] initWithFrame:CGRectMake(50, 660, 100, 20)];
     
     _labelLiving =             [[UILabel alloc] initWithFrame:CGRectMake(170, 150, 200, 20)];
     _labelLiving.text = @"Living";
@@ -94,35 +117,37 @@
     _labelTV.text = @"Watching TV";
     _labelCommercials =        [[UILabel alloc] initWithFrame:CGRectMake(170, 240, 300, 20)];
     _labelCommercials.text = @"Watching commercials";
-    _labelSex =                [[UILabel alloc] initWithFrame:CGRectMake(170, 270, 200, 20)];
-    _labelSex.text = @"Having Sex";
-    _labelEating =             [[UILabel alloc] initWithFrame:CGRectMake(170, 300, 200, 20)];
+    _labelEating =             [[UILabel alloc] initWithFrame:CGRectMake(170, 270, 200, 20)];
     _labelEating.text = @"Eating";
-    _labelBathroom =           [[UILabel alloc] initWithFrame:CGRectMake(170, 330, 200, 20)];
+    _labelBathroom =           [[UILabel alloc] initWithFrame:CGRectMake(170, 300, 200, 20)];
     _labelBathroom.text = @"In the bathroom";
-    _labelToilet =             [[UILabel alloc] initWithFrame:CGRectMake(170, 360, 200, 20)];
+    _labelToilet =             [[UILabel alloc] initWithFrame:CGRectMake(170, 330, 200, 20)];
     _labelToilet.text = @"On the toilet";
-    _labelLaughed =             [[UILabel alloc] initWithFrame:CGRectMake(170, 390, 200, 20)];
+    _labelLaughed =             [[UILabel alloc] initWithFrame:CGRectMake(170, 360, 200, 20)];
     _labelLaughed.text = @"Times laughed";
-    _labelAlcohol =             [[UILabel alloc] initWithFrame:CGRectMake(170, 420, 200, 20)];
+    _labelAlcohol =             [[UILabel alloc] initWithFrame:CGRectMake(170, 390, 200, 20)];
     _labelAlcohol.text = @"Liters of alcohol drunk";
-    _labelKissing =             [[UILabel alloc] initWithFrame:CGRectMake(170, 450, 200, 20)];
+    _labelKissing =             [[UILabel alloc] initWithFrame:CGRectMake(170, 420, 200, 20)];
     _labelKissing.text = @"Kissing";
-    _labelCoffees =             [[UILabel alloc] initWithFrame:CGRectMake(170, 480, 200, 20)];
+    _labelCoffees =             [[UILabel alloc] initWithFrame:CGRectMake(170, 450, 200, 20)];
     _labelCoffees.text = @"Coffees";
-    _labelIndoor =             [[UILabel alloc] initWithFrame:CGRectMake(170, 510, 200, 20)];
+    _labelIndoor =             [[UILabel alloc] initWithFrame:CGRectMake(170, 480, 200, 20)];
     _labelIndoor.text = @"Indoor";
+    _labelHeartbeats = [[UILabel alloc] initWithFrame:CGRectMake(170, 510, 200, 20)];
+    _labelHeartbeats.text = @"Number of heart beats";
+    _labelWords = [[UILabel alloc] initWithFrame:CGRectMake(170, 540, 200, 20)];
+    _labelWords.text = @"Number of words said";
     
     // men only
-    _labelStarring =           [[UILabel alloc] initWithFrame:CGRectMake(170, 540, 200, 20)];
+    _labelStarring =           [[UILabel alloc] initWithFrame:CGRectMake(170, 570, 200, 20)];
     _labelStarring.text = @"Starring at women";
     
     // women only
-    _labelWear =               [[UILabel alloc] initWithFrame:CGRectMake(170, 570, 200, 20)];
+    _labelWear =               [[UILabel alloc] initWithFrame:CGRectMake(170,600, 200, 20)];
     _labelWear.text = @"Deciding what to wear";
-    _labelShopping =           [[UILabel alloc] initWithFrame:CGRectMake(170, 600, 200, 20)];
+    _labelShopping =           [[UILabel alloc] initWithFrame:CGRectMake(170, 630, 200, 20)];
     _labelShopping.text = @"Shopping";
-    _labelHair =                [[UILabel alloc] initWithFrame:CGRectMake(170, 630, 200, 20)];
+    _labelHair =                [[UILabel alloc] initWithFrame:CGRectMake(170, 660, 200, 20)];
     _labelHair.text = @"Doing your hair";
     
     // Living Icon
@@ -150,64 +175,70 @@
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
-    // Having Sex Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 267, 25, 25)];
-    image = [UIImage imageNamed:@"sex.png"];
-    imageHolder.image = image;
-    [self.view addSubview:imageHolder];
-    
     // Eating Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 297, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 267, 25, 25)];
     image = [UIImage imageNamed:@"eat.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // Bathroom Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 327, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 297, 25, 25)];
     image = [UIImage imageNamed:@"bathroom.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // Toilet Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 357, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 327, 25, 25)];
     image = [UIImage imageNamed:@"toilet.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // Laugh Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 387, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 357, 25, 25)];
     image = [UIImage imageNamed:@"laugh.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // Alcohol Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 417, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 387, 25, 25)];
     image = [UIImage imageNamed:@"alcohol.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // Kissing Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 447, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 417, 25, 25)];
     image = [UIImage imageNamed:@"kiss.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // Coffee Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 477, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 447, 25, 25)];
     image = [UIImage imageNamed:@"coffee.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // Indoor Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 507, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 477, 25, 25)];
     image = [UIImage imageNamed:@"indoor.png"];
+    imageHolder.image = image;
+    [self.view addSubview:imageHolder];
+    
+    // Number Of Heart Beats Icon
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 507, 25, 25)];
+    image = [UIImage imageNamed:@"heartBeats.png"];
+    imageHolder.image = image;
+    [self.view addSubview:imageHolder];
+    
+    // Number of words said
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 537, 25, 25)];
+    image = [UIImage imageNamed:@"talking.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // MEN ONLY - Starring at women Icon
     if(boIsMan)
     {
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 537, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 567, 25, 25)];
     image = [UIImage imageNamed:@"starring.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
@@ -215,27 +246,35 @@
     else
     {
     // WOMEN ONLY - Deciding what to wear at Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 567, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 597, 25, 25)];
     image = [UIImage imageNamed:@"wear.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // WOMEN ONLY - Shopping Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 597, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 627, 25, 25)];
     image = [UIImage imageNamed:@"shop.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     
     // WOMEN ONLY - Doing Hair Icon
-    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 627, 25, 25)];
+    imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(10, 657, 25, 25)];
     image = [UIImage imageNamed:@"hair.png"];
     imageHolder.image = image;
     [self.view addSubview:imageHolder];
     }
     
+    // get the indexes
+    int alcoholIndex = (int)[defaults integerForKey:@"AlcoholIndex"];
+    int coffeeIndex = (int) [defaults integerForKey:@"CoffeeIndex"];
+    double tvIndex = (double) [defaults doubleForKey:@"TVIndex"];
+
     // create human instance
     [[Human humanInstance] setM_poDateOfBirth:d];
     [[Human humanInstance] setM_boIsMan:boIsMan];
+    [[Human humanInstance] setAlcoholPerMonth:alcoholIndex];
+    [[Human humanInstance] setCoffeePerMonth:coffeeIndex];
+    [[Human humanInstance] set_tvHoursPerDay:tvIndex];
     
     //format the date and store it as a string in stringFromDate variable
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -259,9 +298,6 @@
     [[self view] addSubview:_labelTV];
     [[self view] addSubview:_labelCommercials];
     [[self view] addSubview:_labelCommercialsVal];
-    
-    [[self view] addSubview:_labelSex];
-    [[self view] addSubview:_labelSexVal];
     [[self view] addSubview:_labelEatingVal];
     [[self view] addSubview:_labelEating];
     [[self view] addSubview:_labelBathroomVal];
@@ -278,6 +314,10 @@
     [[self view] addSubview:_labelCoffeesVal];
     [[self view] addSubview:_labelIndoorVal];
     [[self view] addSubview:_labelIndoor];
+    [[self view] addSubview:_labelHeartbeatsVal];
+    [[self view] addSubview:_labelHeartbeats];
+    [[self view] addSubview:_labelWordsVal];
+      [[self view] addSubview:_labelWords];
     
     // men only
     if(boIsMan)
@@ -404,34 +444,46 @@
                                                     numberStyle:NSNumberFormatterDecimalStyle];
     _labelIndoorVal.text = displayHours;
     
+    // heart beats
+    hours = [[Human humanInstance]longGetNoHeartbeats];
+    displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
+                                                    numberStyle:NSNumberFormatterDecimalStyle];
+    _labelHeartbeatsVal.text = displayHours;
+    
+    // words said
+    hours = [[Human humanInstance]longGetNoWords];
+    displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
+                                                    numberStyle:NSNumberFormatterDecimalStyle];
+    _labelWordsVal.text = displayHours;
+    
     // MEN - starring at women
     if([[Human humanInstance] m_boIsMan])
     {
-    hours = [[Human humanInstance]longGetStarringWomenHours];
-    displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
-                                                    numberStyle:NSNumberFormatterDecimalStyle];
-    _labelStarringVal.text = displayHours;
+        hours = [[Human humanInstance]longGetStarringWomenHours];
+        displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
+                                                        numberStyle:NSNumberFormatterDecimalStyle];
+        _labelStarringVal.text = displayHours;
     }
     else
     {
-    
-    // WOMEN - deciding what to wear
-    hours = [[Human humanInstance]longGetDecidingWearHours];
-    displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
-                                                    numberStyle:NSNumberFormatterDecimalStyle];
-    _labelWearVal.text = displayHours;
-    
-    // WOMEN - shopping
-    hours = [[Human humanInstance]longGetShoppingHours];
-    displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
-                                                    numberStyle:NSNumberFormatterDecimalStyle];
-    _labelShoppingVal.text = displayHours;
-    
-    // WOMEN - doing hair
-    hours = [[Human humanInstance]longGetDoingHairHours];
-    displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
-                                                    numberStyle:NSNumberFormatterDecimalStyle];
-    _labelHairVal.text = displayHours;
+        
+        // WOMEN - deciding what to wear
+        hours = [[Human humanInstance]longGetDecidingWearHours];
+        displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
+                                                        numberStyle:NSNumberFormatterDecimalStyle];
+        _labelWearVal.text = displayHours;
+        
+        // WOMEN - shopping
+        hours = [[Human humanInstance]longGetShoppingHours];
+        displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
+                                                        numberStyle:NSNumberFormatterDecimalStyle];
+        _labelShoppingVal.text = displayHours;
+        
+        // WOMEN - doing hair
+        hours = [[Human humanInstance]longGetDoingHairHours];
+        displayHours = [NSNumberFormatter localizedStringFromNumber:@(hours)
+                                                        numberStyle:NSNumberFormatterDecimalStyle];
+        _labelHairVal.text = displayHours;
     }
     
     // set the background color
@@ -439,6 +491,11 @@
                                                     green:157.0f/255.0f
                                                      blue:242.0f/255.0f
                                                     alpha:1.0f]];
+    
+    // add shadow to buttons
+    _butHours.layer.shadowOpacity = 0.9;
+    _butMinutes.layer.shadowOpacity = 0;
+    _butDays.layer.shadowOpacity = 0;
     
     // refresh the view
     [self.view setNeedsDisplay];
@@ -537,6 +594,18 @@
                                                       numberStyle:NSNumberFormatterDecimalStyle];
     _labelIndoorVal.text = displayMinutes;
     
+    // heart beats
+    minutes = [[Human humanInstance]longGetNoHeartbeats];
+    displayMinutes = [NSNumberFormatter localizedStringFromNumber:@(minutes)
+                                                    numberStyle:NSNumberFormatterDecimalStyle];
+    _labelHeartbeatsVal.text = displayMinutes;
+    
+    // words said
+    minutes = [[Human humanInstance]longGetNoWords];
+    displayMinutes = [NSNumberFormatter localizedStringFromNumber:@(minutes)
+                                                    numberStyle:NSNumberFormatterDecimalStyle];
+    _labelWordsVal.text = displayMinutes;
+    
     // MEN - starring at women
     minutes = [[Human humanInstance]longGetStarringWomenMinutes];
     displayMinutes = [NSNumberFormatter localizedStringFromNumber:@(minutes)
@@ -566,6 +635,11 @@
                                                     green:178.0f/255.0f
                                                      blue:102.0f/255.0f
                                                     alpha:1.0f]];
+    
+    // add shadow to buttons
+    _butHours.layer.shadowOpacity = 0.0;
+    _butMinutes.layer.shadowOpacity = 0.9;
+    _butDays.layer.shadowOpacity = 0;
     
     // refresh the view
     [self.view setNeedsDisplay];
@@ -662,6 +736,19 @@
                                                    numberStyle:NSNumberFormatterDecimalStyle];
     _labelIndoorVal.text = displayDays;
     
+    // heart beats
+    days = [[Human humanInstance]longGetNoHeartbeats];
+    displayDays = [NSNumberFormatter localizedStringFromNumber:@(days)
+                                                      numberStyle:NSNumberFormatterDecimalStyle];
+    _labelHeartbeatsVal.text = displayDays;
+    
+    // words said
+    days = [[Human humanInstance]longGetNoWords];
+    displayDays = [NSNumberFormatter localizedStringFromNumber:@(days)
+                                                      numberStyle:NSNumberFormatterDecimalStyle];
+    _labelWordsVal.text = displayDays;
+
+    
     // MEN - starring at women
     days = [[Human humanInstance]floatGetStarringWomenDays];
     displayDays = [NSNumberFormatter localizedStringFromNumber:@(days)
@@ -691,6 +778,11 @@
                                                     green:178.0f/255.0f
                                                      blue:255.0f/255.0f
                                                     alpha:1.0f]];
+    // add shadow to buttons
+    _butHours.layer.shadowOpacity = 0;
+    _butMinutes.layer.shadowOpacity = 0;
+    _butDays.layer.shadowOpacity = 0.9;
+    
     // refresh the view
     [self.view setNeedsDisplay];
 }

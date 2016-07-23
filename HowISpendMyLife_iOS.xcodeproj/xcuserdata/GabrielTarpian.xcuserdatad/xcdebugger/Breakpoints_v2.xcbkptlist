@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HowISpendMyLife_iOS/Human.h"
-            timestampString = "482432651.767691"
+            timestampString = "484339095.520271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "+humanInstance"
             landmarkType = "4">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HowISpendMyLife_iOS/Human.m"
-            timestampString = "483622271.662536"
+            timestampString = "484339095.520271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "812"
-            endingLineNumber = "812"
+            startingLineNumber = "787"
+            endingLineNumber = "787"
             landmarkName = "-longGetLivingMinutes"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,12 +58,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HowISpendMyLife_iOS/ViewController.m"
-            timestampString = "483888265.406858"
+            timestampString = "484338290.696289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "-updateGenderTextField"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HowISpendMyLife_iOS/Human.m"
+            timestampString = "484339095.520271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1210"
+            endingLineNumber = "1210"
+            landmarkName = "-longGetAlcoholLiters"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
